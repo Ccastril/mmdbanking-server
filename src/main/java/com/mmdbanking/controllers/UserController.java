@@ -51,4 +51,13 @@ public class UserController {
         System.out.println("this is back in the user controller allegedly one has been created");
         return ResponseEntity.status(HttpStatus.OK).body("This is the return body of the create method" + newUser.toString());
     }
+    @PostMapping("/create_new")
+    @ResponseBody
+    public ResponseEntity<String> createUserEmptyAccount(@RequestBody User newUser) {
+        System.out.println("you are now in the createUserEmptyAccount method");
+        User createdUser = userService.createUserEmptyAccount(newUser);
+        System.out.println(createdUser.toString());
+        return ResponseEntity.status(HttpStatus.OK).body("This is the response of the createUserEmptyAccount method");
+
+    }
 }

@@ -11,4 +11,6 @@ public interface IUserService {
     public User save(User userTemplate);
 
     public User findOneById(String id);
+
+    public User createUserEmptyAccount(User user);
 }
