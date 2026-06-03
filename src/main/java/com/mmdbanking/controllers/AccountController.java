@@ -21,7 +21,6 @@ public class AccountController {
     @GetMapping("/find")
     @ResponseBody
     public ResponseEntity<String> findOne(@RequestParam("id") String id) {
-        System.out.println("this is the incoming request " + " " + id);
         Account retrievedAccount = accountService.findOneById(id);
         return ResponseEntity.status(HttpStatus.OK).body("this is the response from the account controllers /find get mapping" + " " + retrievedAccount.toString());
     }

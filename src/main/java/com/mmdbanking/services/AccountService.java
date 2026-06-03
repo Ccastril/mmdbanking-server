@@ -22,13 +22,7 @@ public class AccountService implements IAccountService {
     }
 
     public List<Account> saveAll(List<Account> accounts) {
-        System.out.println("these are teh accounts you are trying to save " + accounts.toString());
         List<Account> insertedAccounts = accountRepository.saveAll(accounts);
-
-
-
-
-        System.out.println("these are teh accounts you have saved"  + insertedAccounts.toString());
         return insertedAccounts;
     }
 

@@ -25,8 +25,6 @@ public class UserService implements IUserService{
     public User login(LoginFormTemplate loginTemplate) {
         //test get a user
         User user = userRepository.findOne(loginTemplate.getPassword());
-        System.out.println("this in the user service in the login method");
-        System.out.println("this is the retrieved user " + user.toString());
         return user;
     }
 

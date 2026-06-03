@@ -30,7 +30,6 @@ public class TransactionService implements ITransactionService {
         }
         u.setTransactions(currentTransactions);
         userRepository.save(u);
-        System.out.println("this is the user that the transactions were addeed to" + " " + u.toString());
         return result;
     }
 }

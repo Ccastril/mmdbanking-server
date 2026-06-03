@@ -26,11 +26,8 @@ public class UserController {
     @PostMapping("/login")
     @ResponseBody
     public ResponseEntity<User> login(@RequestBody LoginFormTemplate lft) {
-        System.out.println("IN LOGIN");
-        System.out.println(lft.getUsername() + " in java " + lft.getPassword());
         User retrievedUser = userService.login(lft);
         for (Account account : retrievedUser.getAccounts()) {
-            System.out.println(account.toString());
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(retrievedUser);
@@ -38,7 +35,6 @@ public class UserController {
     @GetMapping("/find")
     @ResponseBody
     public ResponseEntity<String> findOne(@RequestParam("id") String id) {
-        System.out.println("This is the id " + id);
         User retrievedUser = userService.findOneById(id);
         return ResponseEntity.status(HttpStatus.OK).body("this is the body of the find one request " + retrievedUser.toString());
     }
@@ -47,15 +43,12 @@ public class UserController {
     public ResponseEntity<String> createUser(@RequestBody User userTemplate ) {
         System.out.println(userTemplate.toString());
         User newUser = userService.save(userTemplate);
-        System.out.println("this is back in the user controller allegedly one has been created");
         return ResponseEntity.status(HttpStatus.OK).body("This is the return body of the create method" + newUser.toString());
     }
     @PostMapping("/create_new")
     @ResponseBody
     public ResponseEntity<String> createUserEmptyAccount(@RequestBody User newUser) {
-        System.out.println("you are now in the createUserEmptyAccount method");
         User createdUser = userService.createUserEmptyAccount(newUser);
-        System.out.println(createdUser.toString());
         return ResponseEntity.status(HttpStatus.OK).body("This is the response of the createUserEmptyAccount method");
 
     }
