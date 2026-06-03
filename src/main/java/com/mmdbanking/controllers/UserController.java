@@ -2,6 +2,7 @@ package com.mmdbanking.controllers;
 
 //Enable cross origins to recieve request
 
+import com.mmdbanking.models.Account;
 import com.mmdbanking.services.IUserService;
 import com.mmdbanking.templates.LoginFormTemplate;
 import com.mmdbanking.models.User;
@@ -24,17 +25,15 @@ public class UserController {
     //response body is used to return only data not rendered web pages
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<String> login(@RequestBody LoginFormTemplate lft) {
+    public ResponseEntity<User> login(@RequestBody LoginFormTemplate lft) {
         System.out.println("IN LOGIN");
         System.out.println(lft.getUsername() + " in java " + lft.getPassword());
-        List<User> retrievedUsers = userService.login(lft);
-
-        for(User user : retrievedUsers) {
-            System.out.println(user.toString());
+        User retrievedUser = userService.login(lft);
+        for (Account account : retrievedUser.getAccounts()) {
+            System.out.println(account.toString());
         }
 
-
-        return ResponseEntity.status(HttpStatus.OK).body("This return http status headers and give use a body to use");
+        return ResponseEntity.status(HttpStatus.OK).body(retrievedUser);
     }
     @GetMapping("/find")
     @ResponseBody

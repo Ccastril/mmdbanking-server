@@ -22,17 +22,19 @@ public class UserService implements IUserService{
     private AccountRepository accountRespository;
 
     @Override
-    public List<User> login(LoginFormTemplate loginTemplate) {
+    public User login(LoginFormTemplate loginTemplate) {
         //test get a user
-        List<User> users = userRepository.findAll(loginTemplate.getUsername());
-        return users;
+        User user = userRepository.findOne(loginTemplate.getPassword());
+        System.out.println("this in the user service in the login method");
+        System.out.println("this is the retrieved user " + user.toString());
+        return user;
     }
 
     @Override
     public User save(User userTemplate) {
         List<Account> accountsList = new ArrayList<>();
-        User newUser = new User(null, userTemplate.getFirstName(), userTemplate.getLastName(), userTemplate.getEmail(), userTemplate.getUsername(), userTemplate.getPassword(), null);
-        Account newAccount = new Account(null, null, AccountTypes.SAVINGS, "000000000",0.0);
+        User newUser = new User(null, userTemplate.getFirstName(), userTemplate.getLastName(), userTemplate.getEmail(), userTemplate.getUsername(), userTemplate.getPassword(), null, null);
+        Account newAccount = new Account(null, null, AccountTypes.SAVINGS, "000000000",0.0, "22222222");
         accountsList.add(newAccount);
         newUser.setAccounts(accountsList);
         userRepository.save(newUser);
@@ -45,13 +47,18 @@ public class UserService implements IUserService{
         return returnedUser;
     }
 
+    public User findOneById(ObjectId id) {
+        User returnedUser = userRepository.findOneById(id);
+        return returnedUser;
+    }
+
     @Override
     @Transactional
     public User createUserEmptyAccount(User newUser) {
 
         ObjectId newUserId = new ObjectId();
         ObjectId newAccountId = new ObjectId();
-        Account emptyAccount = new Account(newAccountId, newUserId, AccountTypes.UNDEFINED, "000000000", 0.0);
+        Account emptyAccount = new Account(newAccountId, newUserId, AccountTypes.UNDEFINED, "000000000", 0.0, "22222222");
         List<Account> accountList = new ArrayList<>();
 
         newUser.setId(newUserId);

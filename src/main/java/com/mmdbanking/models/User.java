@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
@@ -20,13 +21,18 @@ public class User {
     private ObjectId id;
     private String firstName;
     private String lastName;
+    @Indexed(unique = true)
     private String email;
+    @Indexed(unique = true)
     private String username;
+    @Indexed(unique = true)
     private String password;
     @DocumentReference(lazy = true)
     private List<Account> accounts;
+    @DocumentReference(lazy = true)
+    private List<Transaction> transactions;
 
-    public User(ObjectId id, String firstName, String lastName, String email, String username, String password, List<Account> accounts) {
+    public User(ObjectId id, String firstName, String lastName, String email, String username, String password, List<Account> accounts, List<Transaction> transactions) {
         super();
         this.id = id;
         this.firstName = firstName;
@@ -35,6 +41,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.accounts = accounts;
+        this.transactions = transactions;
     }
 
     @Override

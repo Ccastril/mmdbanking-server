@@ -6,7 +6,7 @@ import com.mmdbanking.models.User;
 import java.util.List;
 
 public interface IUserService {
-    public List<User> login(LoginFormTemplate loginTemplate);
+    public User login(LoginFormTemplate loginTemplate);
 
     public User save(User userTemplate);
 

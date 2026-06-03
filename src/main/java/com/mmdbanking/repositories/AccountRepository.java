@@ -12,5 +12,4 @@ public interface AccountRepository extends MongoRepository<Account, String> {
     @Query("{_id:?0}")
     Account findOneById(String id);
 
-
 }

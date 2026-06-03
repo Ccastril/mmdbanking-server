@@ -18,14 +18,16 @@ public class Account {
     private AccountTypes accountType;
     private String routingNumber;
     private Double balance;
+    private String accountNumber;
 
-    public Account(ObjectId id, ObjectId accountOwnerId, AccountTypes accountType, String routingNumber, Double balance) {
+    public Account(ObjectId id, ObjectId accountOwnerId, AccountTypes accountType, String routingNumber, Double balance, String accountNumber) {
         super();
         this.id = id;
         this.accountOwnerId = accountOwnerId;
         this.accountType = accountType;
         this.routingNumber = routingNumber;
         this.balance = balance;
+        this.accountNumber = accountNumber;
     }
 
 
